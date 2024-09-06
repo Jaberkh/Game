@@ -26,7 +26,7 @@ def validate_user():
     data = request.get_json()
     if data and 'value' in data:
         print(data['value'])
-        isvalid = validate_init_data(data['value'], 'BOT TOKEN HERE')
+        isvalid = validate_init_data(data['value'], '7494538640:AAFapduSliXBCsPXsaHc9Oxn62pdRd5oEzc')
         print(isvalid)
         return jsonify(isvalid=isvalid)
     return jsonify(isvalid=False)
