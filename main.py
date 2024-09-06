@@ -31,6 +31,3 @@ def validate_user():
         return jsonify(isvalid=isvalid)
     return jsonify(isvalid=False)
 
-
-if __name__ == '__main__':
-    app.run(port=8080)
