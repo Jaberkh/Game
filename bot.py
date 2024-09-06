@@ -3,7 +3,7 @@ from telebot.types import (Message, InlineKeyboardMarkup,
                            InlineKeyboardButton, WebAppInfo)
 
 
-bot = TeleBot('BOT TOKEN HERE')
+bot = TeleBot('7494538640:AAFapduSliXBCsPXsaHc9Oxn62pdRd5oEzc')
 
 
 @bot.message_handler(commands=['start'])
