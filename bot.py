@@ -11,7 +11,7 @@ def start(message: Message):
     markup = InlineKeyboardMarkup([
         [InlineKeyboardButton(text='Your MiniApp',
                               web_app=WebAppInfo(
-                                  ''
+                                  'https://jaberkh.github.io/Game/index.html'
                               ))]
     ])
 
