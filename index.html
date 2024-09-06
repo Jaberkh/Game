@@ -3,47 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="JeylooTest1_bot" data-size="medium" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
-<script type="text/javascript">
-  function onTelegramAuth(user) {
-    alert('Logged in as ' + user.first_name + ' ' + user.last_name + ' (' + user.id + (user.username ? ', @' + user.username : '') + ')');
-  }
-</script>
-    <script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous">
-    </script>
-
+    <title>Telegram Mini App</title>
     <style>
-        body {
-            background-color: var(--tg-theme-bg-color);
-            color: var(--tg-theme-text-color);
-        }
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
     </style>
-
 </head>
 <body>
-    <p id="firstname">Hello World</p>
-    <button onclick="sendData()">Send Data</button>
-    <button id="closeApp" onclick="closeApp()">Close App</button>
-    
-    <script>
-        const tg = window.Telegram.WebApp;
-        console.log(tg.initDataUnsafe)
-        function sendData() {
-            $.ajax({
-                url: '/process',
-                type: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify({ 'value': tg.initData }),
-            });
-        };
-        function closeApp() {
-            tg.close()
-        };
-    </script>
+    <div class="container">
+        <h1>Welcome to the Telegram Mini App</h1>
+        <p>This is a basic setup for a Telegram bot and HTML page.</p>
+    </div>
 </body>
 </html>
