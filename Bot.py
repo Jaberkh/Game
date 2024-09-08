@@ -1,8 +1,8 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
-from telegram.ext import Application, CommandHandler
+from telegram.ext import ApplicationBuilder, CommandHandler
 from flask import Flask, request
-import asyncio
 import os
+import asyncio
 
 app = Flask(__name__)
 
@@ -22,7 +22,7 @@ async def start(update: Update, context):
     await update.message.reply_text('روی دکمه زیر کلیک کنید تا بازی شروع شود:', reply_markup=reply_markup)
 
 # تنظیم Webhook
-async def set_webhook(application: Application):
+async def set_webhook(application):
     await application.bot.set_webhook(WEBHOOK_URL)
 
 # نقطه ورود برای Webhook تلگرام
@@ -36,7 +36,7 @@ def webhook():
 # تابع اصلی برای راه‌اندازی بات
 async def main():
     global application
-    application = Application.builder().token(TOKEN).build()
+    application = ApplicationBuilder().token(TOKEN).build()
 
     # هندلر برای دستور /start
     application.add_handler(CommandHandler("start", start))
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     # استفاده از پورت مشخص‌شده توسط Render
     port = int(os.environ.get("PORT", 10000))
 
-    # اجرای اپلیکیشن Flask
+    # اجرای اپلیکیشن
     loop = asyncio.get_event_loop()
     loop.run_until_complete(main())
     app.run(host='0.0.0.0', port=port)
