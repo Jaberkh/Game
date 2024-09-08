@@ -8,7 +8,7 @@ TOKEN = '7494538640:AAFapduSliXBCsPXsaHc9Oxn62pdRd5oEzc'
 async def start(update: Update, context):
     # ایجاد دکمه شیشه‌ای که به WebApp لینک می‌دهد
     keyboard = [
-        [InlineKeyboardButton(text="شروع بازی", web_app=WebAppInfo(url="https://jaberkh.github.io/Game/"))]
+        [InlineKeyboardButton(text="شروع بازی", web_app=WebAppInfo(url="https://jaberkh.github.io/Game/index.html"))]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
