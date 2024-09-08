@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 # توکن بات خود را وارد کنید
 TOKEN = '7200440128:AAFE1aOYaMj0Eqozc0jp6DDDDlt-Xad9bic'
-WEBHOOK_URL = 'https://base-test.onrender.com/webhook'  # آدرس Webhook با /webhook
+WEBHOOK_URL = 'https://base-test.onrender.com'  # آدرس Webhook با /webhook
 
 # تابع شروع
 async def start(update: Update, context):
