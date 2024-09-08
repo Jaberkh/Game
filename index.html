@@ -3,34 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centered Vertical Rectangle with Background Image</title>
+    <title>Onchain Game with Clickable Circle</title>
     <style>
-        /* تنظیمات صفحه برای قرارگیری مستطیل در وسط */
+        /* تنظیمات صفحه برای قرارگیری مستطیل و دایره در وسط */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             display: flex;
-            justify-content: center;  /* برای وسط‌چین کردن افقی */
-            align-items: center;      /* برای وسط‌چین کردن عمودی */
+            flex-direction: column; /* چیدمان عمودی */
+            justify-content: center; /* وسط‌چین کردن محتوا */
+            align-items: center;  /* مرکزچین کردن افقی */
             background-image: url('https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2024%2F05%2FBase-Coinbase.jpg&w=1536&q=75'); /* آدرس تصویر بک‌گراند */
             background-size: cover;   /* تصویر را به اندازه کل صفحه کشیده می‌شود */
             background-position: center; /* تصویر را در مرکز صفحه قرار می‌دهد */
             background-repeat: no-repeat; /* تصویر تکرار نمی‌شود */
         }
 
+        /* تنظیمات برای متن در بالای صفحه */
+        .title {
+            margin-top: 20px;
+            font-size: 32px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* سایه برای بهتر دیده شدن */
+        }
+
         /* تنظیمات مستطیل سفید */
         .rectangle {
-            width: 300px;           /* عرض مستطیل */
-            height: 400px;          /* ارتفاع مستطیل */
+            position: relative; /* برای قرار دادن دایره روی آن */
+            width: 200px;
+            height: 400px;
             background-color: rgba(255, 255, 255, 0.8); /* رنگ سفید با opacity 80% */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* سایه کوچک برای جلوه بهتر */
-            border-radius: 10px;    /* گوشه‌های گرد مستطیل */
+            border-radius: 10px; /* گوشه‌های گرد مستطیل */
+        }
+
+        /* تنظیمات دایره آبی */
+        .circle {
+            position: absolute; /* قرار دادن دایره به صورت مطلق */
+            bottom: -35px; /* برای قرارگیری نصف دایره روی مستطیل */
+            left: 50%; /* قرارگیری در وسط به صورت افقی */
+            transform: translateX(-50%); /* جابجایی دایره به مرکز مستطیل */
+            width: 70px;
+            height: 70px;
+            background-color: rgba(0, 0, 255, 0.8); /* رنگ آبی با opacity 80% */
+            border-radius: 50%; /* برای ساخت دایره */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* سایه برای جلوه بهتر */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* تنظیمات تصویر داخل دایره */
+        .circle img {
+            width: 40px; /* عرض تصویر */
+            height: 40px; /* ارتفاع تصویر */
+            cursor: pointer; /* تغییر نشانگر ماوس به حالت کلیک */
         }
     </style>
 </head>
 <body>
+
+    <!-- متن در بالای صفحه -->
+    <div class="title">Base Onchain Game</div>
+
     <!-- مستطیل سفید در وسط صفحه -->
-    <div class="rectangle"></div>
+    <div class="rectangle">
+        <!-- دایره آبی با تصویر کلیک‌شونده -->
+        <div class="circle">
+            <!-- لینک به صفحه اصلی با تصویر -->
+            <a href="file:///E:/Telegram%20Game/MiniApp/index.html">
+                <img src="https://moonpay-marketing-c337344.payloadcms.app/media/base%20logo.webp" alt="Clickable Image">
+            </a>
+        </div>
+    </div>
+
 </body>
 </html>
