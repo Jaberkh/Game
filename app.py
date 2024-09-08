@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # توکن بات تلگرام و URL وب‌هوک
 TELEGRAM_TOKEN = '7494538640:AAFapduSliXBCsPXsaHc9Oxn62pdRd5oEzc'
-WEBHOOK_URL = 'https://jaberkh.github.io/Game/index.html'
+WEBHOOK_URL = 'https://jaberkh.github.io/Game/index2.html'
 TELEGRAM_API_URL = f'https://api.telegram.org/bot{TELEGRAM_TOKEN}/'
 
 def set_webhook():
