@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 
 # توکن بات خود را وارد کنید
-TOKEN = 'YOUR_BOT_TOKEN'  # اینجا توکن خود را جایگزین کنید
+TOKEN = '7200440128:AAFE1aOYaMj0Eqozc0jp6DDDDlt-Xad9bic'  # اینجا توکن خود را جایگزین کنید
 WEBHOOK_URL = 'https://base-test.onrender.com/webhook'  # آدرس Webhook در Render
 
 # تابع شروع
