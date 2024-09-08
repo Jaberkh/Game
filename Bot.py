@@ -1,6 +1,7 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import Application, CommandHandler
 from flask import Flask, request
+import asyncio
 import os
 
 app = Flask(__name__)
@@ -33,7 +34,7 @@ def webhook():
     return "ok", 200
 
 # تابع اصلی برای راه‌اندازی بات
-def main():
+async def main():
     global application
     application = Application.builder().token(TOKEN).build()
 
@@ -41,10 +42,17 @@ def main():
     application.add_handler(CommandHandler("start", start))
 
     # تنظیم Webhook در تلگرام
-    application.loop.run_until_complete(set_webhook(application))
+    await set_webhook(application)
+
+    # اجرای اپلیکیشن
+    await application.start()
+    await application.updater.start_polling()
 
 if __name__ == '__main__':
     # استفاده از پورت مشخص‌شده توسط Render
     port = int(os.environ.get("PORT", 10000))
-    main()
+
+    # اجرای اپلیکیشن Flask
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(main())
     app.run(host='0.0.0.0', port=port)
