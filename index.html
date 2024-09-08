@@ -1,50 +1,36 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Base Game</title>
+    <title>Centered Vertical Rectangle with Background Image</title>
     <style>
-        /* تنظیمات برای پس‌زمینه تصویری */
-        body {
-            background-image: url('https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2024%2F05%2FBase-Coinbase.jpg&w=1536&q=75'); /* لینک به تصویر پس‌زمینه */
-            background-size: cover; /* پوشاندن کل صفحه با تصویر */
-            background-position: center; /* قرار دادن تصویر در مرکز */
-            background-repeat: no-repeat; /* عدم تکرار تصویر */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        /* تنظیمات صفحه برای قرارگیری مستطیل در وسط */
+        body, html {
             margin: 0;
-            font-family: Arial, sans-serif;
-            color: white; /* رنگ متن سفید */
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;  /* برای وسط‌چین کردن افقی */
+            align-items: center;      /* برای وسط‌چین کردن عمودی */
+            background-image: url('https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2024%2F05%2FBase-Coinbase.jpg&w=1536&q=75'); /* آدرس تصویر بک‌گراند */
+            background-size: cover;   /* تصویر را به اندازه کل صفحه کشیده می‌شود */
+            background-position: center; /* تصویر را در مرکز صفحه قرار می‌دهد */
+            background-repeat: no-repeat; /* تصویر تکرار نمی‌شود */
         }
 
-        /* استایل برای محتوای اصلی */
-        .content {
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.5); /* پس‌زمینه نیمه‌شفاف برای خوانایی بیشتر متن */
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 1.5em;
+        /* تنظیمات مستطیل سفید */
+        .rectangle {
+            width: 200px;           /* عرض مستطیل */
+            height: 400px;          /* ارتفاع مستطیل */
+            background-color: rgba(255, 255, 255, 0.8); /* رنگ سفید با opacity 80% */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* سایه کوچک برای جلوه بهتر */
+            border-radius: 10px;    /* گوشه‌های گرد مستطیل */
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1> Welcome To Base Game </h1>
-        <p>Just For Test</p>
-    </div>
-
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
+    <!-- مستطیل سفید در وسط صفحه -->
+    <div class="rectangle"></div>
 </body>
 </html>
