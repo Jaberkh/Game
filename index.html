@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
     <title>Onchain Game with Counter and Clickable Circle</title>
     <style>
         /* تنظیمات صفحه برای قرارگیری مستطیل و دایره در وسط */
@@ -53,8 +53,8 @@
 
         /* تنظیمات دایره کلیک‌شونده در مرکز مستطیل */
         .center-image {
-            width: 250px;
-            height: 250px;
+            width: 200px;
+            height: 200px;
             background-color: rgba(0, 0, 0, 0.7); /* شفافیت 70% */
             border-radius: 50%; /* دایره شدن */
             display: flex;
@@ -66,8 +66,8 @@
 
         /* تنظیمات برای تصویر داخل دایره */
         .center-image img {
-            width: 240px;
-            height: 240px;
+            width: 190px;
+            height: 190px;
             border-radius: 50%;
         }
 
@@ -107,7 +107,7 @@
 
         <!-- تصویر کلیک‌شونده دایره‌ای در مرکز مستطیل -->
         <div class="center-image" onclick="incrementCounter()">
-            <img src="https://fortune.com/img-assets/wp-content/uploads/2024/05/JessePollack-Base-044.jpg?w=1440&q=75" alt="Clickable Center Image">
+            <img src="https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2023%2F05%2FJesse-Pollak.jpg&w=1024&q=75" alt="Clickable Center Image">
         </div>
 
         <!-- دایره آبی با تصویر کلیک‌شونده در پایین مستطیل -->
@@ -126,6 +126,18 @@
             count++;
             document.getElementById("counter").innerText = count;
         }
+
+        /* جلوگیری از زوم شدن صفحه با دابل کلیک */
+        document.addEventListener('dblclick', function(e) {
+            e.preventDefault();
+        });
+
+        /* جلوگیری از زوم با کلیدهای ترکیبی */
+        window.addEventListener('wheel', function(e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     </script>
 
 </body>
