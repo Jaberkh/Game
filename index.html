@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Onchain Game with Clickable Circle</title>
+    <title>Onchain Game with Counter and Clickable Circle</title>
     <style>
         /* تنظیمات صفحه برای قرارگیری مستطیل و دایره در وسط */
         body, html {
@@ -22,7 +22,7 @@
 
         /* تنظیمات برای متن در بالای صفحه */
         .title {
-            margin-top: 10px;
+            margin-top: 10px; /* کاهش فاصله از بالای صفحه */
             font-size: 32px;
             color: white;
             font-weight: bold;
@@ -31,15 +31,47 @@
 
         /* تنظیمات مستطیل سفید */
         .rectangle {
-            position: relative; /* برای قرار دادن دایره روی آن */
+            position: relative; /* برای قرار دادن دایره و شمارشگر در داخل مستطیل */
             width: 300px;
             height: 500px;
             background-color: rgba(255, 255, 255, 0.8); /* رنگ سفید با opacity 80% */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* سایه کوچک برای جلوه بهتر */
             border-radius: 10px; /* گوشه‌های گرد مستطیل */
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
         }
 
-        /* تنظیمات دایره آبی */
+        /* تنظیمات شمارشگر در بالای مستطیل */
+        .counter {
+            font-size: 24px;
+            color: black;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* تنظیمات دایره کلیک‌شونده در مرکز مستطیل */
+        .center-image {
+            width: 250px;
+            height: 250px;
+            background-color: rgba(0, 0, 0, 0.7); /* شفافیت 70% */
+            border-radius: 50%; /* دایره شدن */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px; /* فاصله از بالای مستطیل */
+            cursor: pointer; /* تغییر نشانگر ماوس به حالت کلیک */
+        }
+
+        /* تنظیمات برای تصویر داخل دایره */
+        .center-image img {
+            width: 240px;
+            height: 240px;
+            border-radius: 50%;
+        }
+
+        /* تنظیمات دایره آبی در پایین مستطیل */
         .circle {
             position: absolute; /* قرار دادن دایره به صورت مطلق */
             bottom: -35px; /* برای قرارگیری نصف دایره روی مستطیل */
@@ -55,9 +87,8 @@
             align-items: center;
         }
 
-        /* تنظیمات تصویر داخل دایره */
+        /* تنظیمات تصویر داخل دایره آبی */
         .circle img {
-align-items: center
             width: 50px; /* عرض تصویر */
             height: 50px; /* ارتفاع تصویر */
             cursor: pointer; /* تغییر نشانگر ماوس به حالت کلیک */
@@ -71,14 +102,31 @@ align-items: center
 
     <!-- مستطیل سفید در وسط صفحه -->
     <div class="rectangle">
-        <!-- دایره آبی با تصویر کلیک‌شونده -->
+        <!-- شمارشگر در بالای مستطیل -->
+        <div class="counter" id="counter">0</div>
+
+        <!-- تصویر کلیک‌شونده دایره‌ای در مرکز مستطیل -->
+        <div class="center-image" onclick="incrementCounter()">
+            <img src="https://fortune.com/img-assets/wp-content/uploads/2024/05/JessePollack-Base-044.jpg?w=1440&q=75" alt="Clickable Center Image">
+        </div>
+
+        <!-- دایره آبی با تصویر کلیک‌شونده در پایین مستطیل -->
         <div class="circle">
-            <!-- لینک به صفحه اصلی با تصویر -->
-            <a href="file:///E:/Telegram%20Game/MiniApp/index.html">
+            <a href="https://jaberkh.github.io/Game/">
                 <img src="https://moonpay-marketing-c337344.payloadcms.app/media/base%20logo.webp" alt="Clickable Image">
             </a>
         </div>
     </div>
+
+    <script>
+        let count = 0;
+
+        /* تابع افزایش شمارشگر */
+        function incrementCounter() {
+            count++;
+            document.getElementById("counter").innerText = count;
+        }
+    </script>
 
 </body>
 </html>
