@@ -1,10 +1,8 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import ApplicationBuilder, CommandHandler
-from flask import Flask
-app = Flask(__name__)
 
 # توکن بات خود را وارد کنید
-TOKEN = '7200440128:AAFE1aOYaMj0Eqozc0jp6DDDDlt-Xad9bic'
+TOKEN = 'YOUR_BOT_TOKEN'
 
 # تابع شروع
 async def start(update: Update, context):
@@ -28,4 +26,4 @@ def main():
     application.run_polling()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000)
+    main()
