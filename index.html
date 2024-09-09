@@ -9,7 +9,8 @@
         body, html {
             margin: 0;
             padding: 0;
-            height: 100%;
+            height: 100vh; /* استفاده از 100vh برای نمایش ارتفاع کامل */
+            width: 100vw;  /* استفاده از 100vw برای نمایش عرض کامل */
             display: flex;
             flex-direction: column; /* چیدمان عمودی */
             justify-content: center; /* وسط‌چین کردن محتوا */
@@ -138,6 +139,11 @@
                 e.preventDefault();
             }
         }, { passive: false });
+
+        /* تنظیم برای تمام صفحه شدن اپلیکیشن در تلگرام */
+        if (window.Telegram.WebApp) {
+            Telegram.WebApp.expand();
+        }
     </script>
 
 </body>
