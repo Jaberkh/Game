@@ -42,6 +42,7 @@
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
+            z-index: 1; /* مستطیل در لایه پشت‌تر قرار می‌گیرد */
         }
 
         /* تنظیمات شمارشگر در بالای مستطیل */
@@ -54,8 +55,8 @@
 
         /* تنظیمات دایره کلیک‌شونده در مرکز مستطیل */
         .center-image {
-            width: 200px;
-            height: 200px;
+            width: 200px; /* اندازه اصلی */
+            height: 200px; /* اندازه اصلی */
             background-color: rgba(0, 0, 0, 0.7); /* شفافیت 70% */
             border-radius: 50%; /* دایره شدن */
             display: flex;
@@ -63,36 +64,49 @@
             align-items: center;
             margin-top: 30px; /* فاصله از بالای مستطیل */
             cursor: pointer; /* تغییر نشانگر ماوس به حالت کلیک */
+            z-index: 1; /* در لایه مستطیل */
         }
 
         /* تنظیمات برای تصویر داخل دایره */
         .center-image img {
-            width: 190px;
-            height: 190px;
+            width: 190px; /* اندازه اصلی */
+            height: 190px; /* اندازه اصلی */
             border-radius: 50%;
         }
 
         /* تنظیمات دایره آبی در پایین مستطیل */
         .circle {
             position: absolute; /* قرار دادن دایره به صورت مطلق */
-            bottom: -35px; /* برای قرارگیری نصف دایره روی مستطیل */
+            bottom: 35px; /* کمی بالاتر از پایین مستطیل */
             left: 50%; /* قرارگیری در وسط به صورت افقی */
             transform: translateX(-50%); /* جابجایی دایره به مرکز مستطیل */
-            width: 70px;
-            height: 70px;
+            width: 35px; /* نصف اندازه قبلی */
+            height: 35px; /* نصف اندازه قبلی */
             background-color: rgba(0, 0, 255, 0.8); /* رنگ آبی با opacity 80% */
             border-radius: 50%; /* برای ساخت دایره */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* سایه برای جلوه بهتر */
             display: flex;
             justify-content: center;
             align-items: center;
+            z-index: 2; /* جلوتر از مستطیل */
         }
 
         /* تنظیمات تصویر داخل دایره آبی */
         .circle img {
-            width: 50px; /* عرض تصویر */
-            height: 50px; /* ارتفاع تصویر */
+            width: 25px; /* نصف اندازه قبلی */
+            height: 25px; /* نصف اندازه قبلی */
             cursor: pointer; /* تغییر نشانگر ماوس به حالت کلیک */
+        }
+
+        /* مستطیل آبی تیره از پایین صفحه تا 20 پیکسل بالاتر */
+        .dark-blue-rectangle {
+            position: absolute;
+            bottom: 0; /* شروع از پایین صفحه */
+            left: 0;
+            width: 100%;
+            height: 100px; /* ارتفاع مستطیل */
+            background-color: rgba(0, 0, 139, 0.9); /* آبی تیره با شفافیت 90% */
+            z-index: 0; /* در پایین‌ترین لایه */
         }
     </style>
 </head>
@@ -118,6 +132,9 @@
             </a>
         </div>
     </div>
+
+    <!-- مستطیل آبی تیره در پایین صفحه -->
+    <div class="dark-blue-rectangle"></div>
 
     <script>
         let count = 0;
