@@ -2,7 +2,7 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppI
 from telegram.ext import ApplicationBuilder, CommandHandler
 
 # توکن بات خود را وارد کنید
-TOKEN = 'YOUR_BOT_TOKEN'
+TOKEN = '7200440128:AAFE1aOYaMj0Eqozc0jp6DDDDlt-Xad9bic'
 
 # تابع شروع
 async def start(update: Update, context):
