@@ -73,7 +73,7 @@
         /* تنظیمات بخش متن‌ها در پایین لوگو */
         .text-options {
             position: absolute;
-            bottom: 55px;
+            bottom: 20px; /* تنظیم فاصله از پایین صفحه به 20px */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -85,6 +85,17 @@
             color: white;
             font-size: 10px;
             cursor: pointer;
+        }
+
+        /* مستطیل آبی تیره */
+        .dark-blue-rectangle {
+            position: absolute;
+            bottom: 0; /* موقعیت مستطیل در پایین صفحه */
+            left: 0;
+            width: 100%;
+            height: 100px; /* ارتفاع مستطیل */
+            background-color: rgba(0, 0, 139, 0.9); /* رنگ آبی تیره */
+            z-index: 2; /* اطمینان از قرار گرفتن روی سایر عناصر */
         }
 
     </style>
@@ -102,6 +113,9 @@
             </a>
         </div>
     </div>
+
+    <!-- مستطیل آبی تیره که در پایین صفحه قرار می‌گیرد -->
+    <div class="dark-blue-rectangle"></div>
 
     <!-- لوگو در پایین صفحه -->
     <a href="index.html">
