@@ -3,111 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
-    <title>Onchain Game with Counter and Clickable Circle</title>
+    <title>Onchain Game with Clickable Images</title>
     <style>
-        /* تنظیمات صفحه برای قرارگیری مستطیل و دایره در وسط */
         body, html {
             margin: 0;
             padding: 0;
-            height: 100vh; /* استفاده از 100vh برای نمایش ارتفاع کامل */
-            width: 100vw;  /* استفاده از 100vw برای نمایش عرض کامل */
+            height: 100vh;
+            width: 100vw;
             display: flex;
-            flex-direction: column; /* چیدمان عمودی */
-            justify-content: center; /* وسط‌چین کردن محتوا */
-            align-items: center;  /* مرکزچین کردن افقی */
-            background-image: url('https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2024%2F05%2FBase-Coinbase.jpg&w=1536&q=75'); /* آدرس تصویر بک‌گراند */
-            background-size: cover;   /* تصویر را به اندازه کل صفحه کشیده می‌شود */
-            background-position: center; /* تصویر را در مرکز صفحه قرار می‌دهد */
-            background-repeat: no-repeat; /* تصویر تکرار نمی‌شود */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('Images/background.png'); /* استفاده از تصویر پس‌زمینه داخلی */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
-        /* تنظیمات برای متن در بالای صفحه */
-        .title {
-            margin-top: 10px; /* کاهش فاصله از بالای صفحه */
-            font-size: 32px;
-            color: white;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* سایه برای بهتر دیده شدن */
-        }
-
-        /* تنظیمات مستطیل سفید */
         .rectangle {
-            position: relative; /* برای قرار دادن دایره و شمارشگر در داخل مستطیل */
+            position: relative;
             width: 300px;
             height: 500px;
-            background-color: rgba(255, 255, 255, 0.8); /* رنگ سفید با opacity 80% */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  /* سایه کوچک برای جلوه بهتر */
-            border-radius: 10px; /* گوشه‌های گرد مستطیل */
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            z-index: 1; /* مستطیل در لایه پشت‌تر قرار می‌گیرد */
+            z-index: 1;
         }
 
-        /* تنظیمات شمارشگر در بالای مستطیل */
-        .counter {
-            font-size: 24px;
-            color: black;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-
-        /* تنظیمات دایره کلیک‌شونده در مرکز مستطیل */
-        .center-image {
-            width: 200px; /* اندازه اصلی */
-            height: 200px; /* اندازه اصلی */
-            background-color: rgba(0, 0, 0, 0.7); /* شفافیت 70% */
-            border-radius: 50%; /* دایره شدن */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px; /* فاصله از بالای مستطیل */
-            cursor: pointer; /* تغییر نشانگر ماوس به حالت کلیک */
-            z-index: 1; /* در لایه مستطیل */
-        }
-
-        /* تنظیمات برای تصویر داخل دایره */
         .center-image img {
-            width: 190px; /* اندازه اصلی */
-            height: 190px; /* اندازه اصلی */
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
         }
 
-        /* تنظیمات دایره آبی در پایین مستطیل */
-        .circle {
-            position: absolute; /* قرار دادن دایره به صورت مطلق */
-            bottom: 35px; /* کمی بالاتر از پایین مستطیل */
-            left: 50%; /* قرارگیری در وسط به صورت افقی */
-            transform: translateX(-50%); /* جابجایی دایره به مرکز مستطیل */
-            width: 35px; /* نصف اندازه قبلی */
-            height: 35px; /* نصف اندازه قبلی */
-            background-color: rgba(0, 0, 255, 0.8); /* رنگ آبی با opacity 80% */
-            border-radius: 50%; /* برای ساخت دایره */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* سایه برای جلوه بهتر */
+        .dark-blue-rectangle {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background-color: rgba(0, 0, 139, 0.9);
+            z-index: 3;
+        }
+
+        /* تنظیمات لوگو در پایین صفحه */
+        .logo {
+            position: absolute;
+            bottom: 75px; /* فاصله از پایین 65 پیکسل */
+            align-items: center;
+            transform: translateX(-50%);
+            width: 50px;  /* عرض لوگو */
+            height: 50px; /* ارتفاع لوگو */
+            cursor: pointer;
+            z-index: 4;
+        }
+
+        /* تنظیمات کلیک‌پذیر بودن تصویر مرکز */
+        .center-image {
+            margin-top: 30px;
+        }
+
+        .center-image a {
+            display: block;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .center-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* تنظیمات بخش متن‌ها در پایین لوگو */
+        .text-options {
+            position: absolute;
+            bottom: 55px; /* افزایش فاصله از پایین به 50 پیکسل برای بالا آوردن نوشته‌ها */
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 2; /* جلوتر از مستطیل */
+            z-index: 4;
         }
 
-        /* تنظیمات تصویر داخل دایره آبی */
-        .circle img {
-            width: 25px; /* نصف اندازه قبلی */
-            height: 25px; /* نصف اندازه قبلی */
-            cursor: pointer; /* تغییر نشانگر ماوس به حالت کلیک */
+        .text-options div {
+            margin: 0 40px; /* فاصله 20 پیکسل از دو طرف */
+            color: white;
+            font-size: 10px; /* کاهش اندازه فونت به 10 پیکسل */
+            cursor: pointer;
         }
 
-        /* مستطیل آبی تیره از پایین صفحه تا 20 پیکسل بالاتر */
-        .dark-blue-rectangle {
-            position: absolute;
-            bottom: 0; /* شروع از پایین صفحه */
-            left: 0;
-            width: 100%;
-            height: 100px; /* ارتفاع مستطیل */
-            background-color: rgba(0, 0, 139, 0.9); /* آبی تیره با شفافیت 90% */
-            z-index: 0; /* در پایین‌ترین لایه */
-        }
     </style>
 </head>
 <body>
@@ -121,47 +111,27 @@
         <div class="counter" id="counter">0</div>
 
         <!-- تصویر کلیک‌شونده دایره‌ای در مرکز مستطیل -->
-        <div class="center-image" onclick="incrementCounter()">
-            <img src="https://blockworks.co/_next/image?url=https%3A%2F%2Fblockworks-co.imgix.net%2Fwp-content%2Fuploads%2F2023%2F05%2FJesse-Pollak.jpg&w=1024&q=75" alt="Clickable Center Image">
-        </div>
-
-        <!-- دایره آبی با تصویر کلیک‌شونده در پایین مستطیل -->
-        <div class="circle">
-            <a href="https://jaberkh.github.io/Game/">
-                <img src="https://moonpay-marketing-c337344.payloadcms.app/media/base%20logo.webp" alt="Clickable Image">
+        <div class="center-image">
+            <a href="https://example.com/center-link">
+                <img src="Images/logo.png" alt="Clickable Center Image"> <!-- لینک به تصویر وسط -->
             </a>
         </div>
     </div>
 
-    <!-- مستطیل آبی تیره در پایین صفحه -->
+    <!-- مستطیل آبی تیره که روی مستطیل سفید قرار می‌گیرد -->
     <div class="dark-blue-rectangle"></div>
 
-    <script>
-        let count = 0;
+    <!-- لوگو در پایین صفحه -->
+    <a href="index.htm">
+        <img src="logo.png" alt="Clickable Bottom Image" class="logo"> <!-- لینک به صفحه index.htm -->
+    </a>
 
-        /* تابع افزایش شمارشگر */
-        function incrementCounter() {
-            count++;
-            document.getElementById("counter").innerText = count;
-        }
-
-        /* جلوگیری از زوم شدن صفحه با دابل کلیک */
-        document.addEventListener('dblclick', function(e) {
-            e.preventDefault();
-        });
-
-        /* جلوگیری از زوم با کلیدهای ترکیبی */
-        window.addEventListener('wheel', function(e) {
-            if (e.ctrlKey) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        /* تنظیم برای تمام صفحه شدن اپلیکیشن در تلگرام */
-        if (window.Telegram.WebApp) {
-            Telegram.WebApp.expand();
-        }
-    </script>
+    <!-- بخش متن‌های پایین لوگو -->
+    <div class="text-options">
+        <div class="quests">QUESTS</div>
+        <div class="play">PLAY</div>
+        <div class="referral">REFERRAL</div>
+    </div>
 
 </body>
 </html>
