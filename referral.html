@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+    <title>Onchain Game</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('Images/background.jpg'); /* تصویر پس زمینه */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Arial', sans-serif; /* تغییر فونت کلی به Arial */
+        }
+
+        /* تنظیمات مستطیل عمودی */
+        .rectangle {
+            position: relative;
+            width: 300px;
+            height: 500px;
+            background-color: rgba(0, 0, 0, 0.8); /* تغییر رنگ به سیاه */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px; /* فاصله داخلی از تمام جهات */
+            box-sizing: border-box; /* برای اینکه padding و border به اندازه کل عناصر حساب شود */
+            z-index: 3;
+        }
+
+        /* مستطیل سفید در بالای مستطیل عمودی */
+        .black-rectangle {
+            width: 100%;
+            opacity: 0.9;
+            height: 80px; /* ارتفاع مستطیل سفید */
+            background-color: white; /* تغییر رنگ به سفید */
+            border-top-left-radius: 10px; /* خمیدگی گوشه سمت چپ بالا */
+            border-top-right-radius: 10px; /* خمیدگی گوشه سمت راست بالا */
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* تنظیمات تیتر در مستطیل سفید */
+        .title-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+        }
+
+        /* استایل جدید برای تیتر Earn 10% Rewards from inviting friends */
+        .reward-title {
+            margin-top: 100px; /* فاصله از مستطیل سفید */
+            font-size: 20px;
+            font-weight: bold;
+            color: white; /* رنگ پیش‌فرض متن سفید */
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* سایه دادن به متن */
+        }
+
+        /* استایل برای رنگ کردن قسمت 10% Rewards به رنگ نارنجی */
+        .highlight-orange {
+            color: orange;
+        }
+
+        /* استایل برای دکمه Invite Friends */
+        .invite-button {
+            margin-top: 20px; /* فاصله از متن بالا */
+            width: 200px;
+            height: 40px;
+            background-color: blue; /* رنگ پس‌زمینه آبی */
+            color: white; /* رنگ متن سفید */
+            border: none;
+            border-radius: 10px; /* گوشه‌های خمیده */
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* سایه‌دار کردن دکمه */
+        }
+
+        .invite-button:hover {
+            background-color: darkblue; /* تغییر رنگ هنگام هاور */
+        }
+
+        /* تنظیمات لوگو */
+        .logo {
+            position: absolute;
+            bottom: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            z-index: 4;
+        }
+
+        /* استفاده از تصویر خط در پایین صفحه با شفافیت 80 درصد */
+        .dark-blue-rectangle {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background-image: url('Images/Line.png'); /* تغییر به تصویر خط */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.8; /* شفافیت مستطیل پایین */
+            z-index: 3; /* تصویر باید زیر عناصر دیگر باشد */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- مستطیل سیاه در وسط صفحه -->
+    <div class="rectangle">
+
+        <!-- مستطیل سفید در بالای مستطیل عمودی -->
+        <div class="black-rectangle">
+            <!-- متن تیتر Ads / Tips about Web3 -->
+            <div class="title-text">Ads / Tips about Web3</div>
+        </div>
+
+        <!-- تیتر جدید Earn 10% Rewards from inviting friends -->
+        <div class="reward-title">
+            Earn <span class="highlight-orange">10% Rewards</span> from inviting friends
+        </div>
+
+        <!-- دکمه Invite Friends -->
+        <button class="invite-button" id="inviteButton">+ Invite Friends</button>
+
+    </div>
+
+    <!-- تصویر خط در پایین صفحه با شفافیت 80 درصد -->
+    <div class="dark-blue-rectangle"></div>
+
+    <!-- لوگو در پایین صفحه -->
+    <a href="index.html">
+        <img src="Images/Logo.png" alt="Clickable Bottom Image" class="logo">
+    </a>
+
+    <script>
+        // بررسی اینکه آیا مرورگر از Web Share API پشتیبانی می‌کند یا خیر
+        document.getElementById('inviteButton').addEventListener('click', function() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Invite Friends',
+                    text: 'Just for test',
+                    url: window.location.href // به اشتراک‌گذاری URL صفحه فعلی
+                })
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.log('Error sharing', error));
+            } else {
+                alert('Sharing is not supported by your browser.');
+            }
+        });
+    </script>
+
+</body>
+</html>

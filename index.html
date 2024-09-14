@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+    <title>Onchain Game with Clickable Images</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('Images/background.jpg'); /* تصویر پس زمینه */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Arial', sans-serif; /* تغییر فونت کلی به Arial */
+        }
+
+        /* تنظیمات مستطیل عمودی */
+        .rectangle {
+            position: relative;
+            width: 300px;
+            height: 500px;
+            background-color: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 3;
+        }
+
+        /* مستطیل سیاه در بالای مستطیل سفید */
+        .black-rectangle {
+            width: 100%;
+			opacity: 0.7;
+            height: 80px; /* ارتفاع مستطیل سیاه */
+            background-color: black; /* رنگ پس‌زمینه سیاه */
+            border-top-left-radius: 10px; /* خمیدگی گوشه سمت چپ بالا */
+            border-top-right-radius: 10px; /* خمیدگی گوشه سمت راست بالا */
+            position: absolute;
+            top: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* استایل متن تیتر داخل مستطیل سیاه */
+        .title-text {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* شفافیت برای تصویر وسط */
+        .center-image {
+            margin-top: 70px;
+            opacity: 0.9; /* شفافیت اختصاصی برای تصویر وسط */
+        }
+
+        .center-image a {
+            display: block;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .center-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer; /* اضافه کردن دست نما برای کلیک */
+        }
+
+        /* تغییرات برای قرار دادن شمارنده روی تصویر امتیاز */
+        .score-wrapper {
+            position: relative;
+            margin-top: 15px;
+            width: 160px;
+            height: 160px;
+            z-index: 5;
+        }
+
+        .score-image {
+            width: 100%;  /* تنظیم عرض تصویر */
+            height: 100%; /* تنظیم ارتفاع تصویر */
+            opacity: 0.85; /* شفافیت اختصاصی برای تصویر امتیاز */
+        }
+
+        .counter {
+            position: absolute;
+            top: calc(50% - 20px); /* جابجا کردن شمارنده 10 پیکسل بالاتر */
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(10deg); /* چرخش 10 درجه در جهت عقربه‌های ساعت */
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            z-index: 10;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* اضافه کردن سایه به متن */
+        }
+
+        /* تنظیمات لوگو */
+        .logo {
+            position: absolute;
+            bottom: 75px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            z-index: 4;
+        }
+
+        /* استفاده از تصویر خط در پایین صفحه با شفافیت 80 درصد */
+        .dark-blue-rectangle {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background-image: url('Images/Line.png'); /* تغییر به تصویر خط */
+            background-size: cover;
+            background-position: center;
+            opacity: 0.8; /* شفافیت مستطیل پایین */
+            z-index: 3; /* تصویر باید زیر عناصر دیگر باشد */
+        }
+
+        /* تنظیمات بخش متن‌ها در پایین لوگو */
+        .text-options {
+            position: absolute;
+            bottom: 20px; /* تنظیم فاصله از پایین صفحه */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 4;
+        }
+
+        .text-options div {
+            margin: 0 20px;
+            color: white;
+            font-size: 10px;
+            font-weight: bold; /* بولد کردن متن */
+            cursor: pointer;
+            font-family: 'Arial', sans-serif; /* تغییر فونت به Arial */
+            text-align: center; /* مرکز کردن متن و عکس */
+        }
+
+        /* تنظیمات دکمه Referral */
+        .referral {
+            position: relative;
+            top: -45px; /* جابجایی به سمت بالا */
+            right: -35px; /* جابجایی به سمت راست */
+        }
+
+        .referral img {
+            width: 40px;  /* تنظیم اندازه تصویر */
+            height: 40px;
+            margin-bottom: 5px; /* فاصله‌ی عکس از متن */
+        }
+
+        /* تنظیمات دکمه Quests */
+        .quests {
+            position: relative;
+            top: -45px; /* جابجایی به سمت بالا */
+            left: -35px; /* جابجایی به سمت چپ */
+        }
+
+        .quests img {
+            width: 40px;  /* تنظیم اندازه تصویر */
+            height: 40px;
+            margin-bottom: 5px; /* فاصله‌ی عکس از متن */
+        }
+
+        /* مخفی کردن متون */
+        .quests, .play, .referral {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quests::after, .play::after, .referral::after {
+            content: ''; /* حذف متن با استفاده از محتوای خالی */
+        }
+
+    </style>
+    <script>
+        // تابع برای افزایش مقدار شمارنده
+        function incrementCounter() {
+            var counterElement = document.getElementById('counter');
+            var currentValue = parseInt(counterElement.innerText); // دریافت مقدار فعلی شمارنده
+            counterElement.innerText = currentValue + 1; // افزایش مقدار شمارنده
+        }
+    </script>
+</head>
+<body>
+
+
+    <!-- مستطیل سفید در وسط صفحه با شفافیت 80 درصد -->
+    <div class="rectangle">
+
+        <!-- مستطیل سیاه در بالای مستطیل سفید -->
+        <div class="black-rectangle">
+            <!-- اضافه کردن متن به مستطیل سیاه -->
+            <div class="title-text">Ads / Tips about Web3</div>
+        </div>
+
+        <!-- تصویر کلیک‌شونده در وسط مستطیل -->
+        <div class="center-image">
+            <a href="javascript:void(0);" onclick="incrementCounter()"> <!-- اضافه کردن رویداد کلیک -->
+                <img src="Images/Jesse.PNG" alt="Clickable Center Image">
+            </a>
+        </div>
+
+        <!-- تصویر امتیاز به همراه شمارنده -->
+        <div class="score-wrapper">
+            <img src="Images/Score.png" alt="Score Image" class="score-image">
+            <div class="counter" id="counter">0</div>
+        </div>
+    </div>
+
+    <!-- تصویر خط در پایین صفحه با شفافیت 80 درصد -->
+    <div class="dark-blue-rectangle"></div>
+
+    <!-- لوگو در پایین صفحه -->
+    <a href="index.html">
+        <img src="Images/Logo.png" alt="Clickable Bottom Image" class="logo">
+    </a>
+
+    <!-- بخش متن‌های پایین لوگو -->
+    <div class="text-options">
+        <!-- دکمه Quests در سمت چپ -->
+        <div class="quests">
+            <a href="Tasks.html">
+                <img src="Images/Tasks.png" alt="Quests Image"> <!-- تصویر Quests -->
+            </a>
+        </div>
+
+        <!-- دکمه Play در وسط -->
+        <div class="play"></div>
+
+        <!-- دکمه Referral در سمت راست -->
+        <div class="referral">
+            <a href="referral.html">
+                <img src="Images/add.png" alt="Referral Image"> <!-- تصویر Referral -->
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
